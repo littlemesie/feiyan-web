@@ -16,6 +16,7 @@ from tornado.options import options, define
 import asyncio
 from core.log import configure_logging
 from core.http import BaseHandler
+from handlers.upload_handler import UploadHandler
 
 define("port", default=8080, help="run on the given port", type=int)
 
@@ -28,7 +29,8 @@ class MainHandler(BaseHandler):
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/fy/test", MainHandler)
+            (r"/fy/test", MainHandler),
+            (r"/fy/upload", UploadHandler),
         ]
 
         super(Application, self).__init__(handlers)
